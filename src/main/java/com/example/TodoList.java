@@ -1,14 +1,16 @@
 package com.example;
 
+import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.VerticalLayout;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@UIScope
+@SpringComponent
 class TodoList extends VerticalLayout implements TodoChangeListener {
     @Autowired
     TodoRepository repository;
