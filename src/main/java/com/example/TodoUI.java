@@ -2,7 +2,7 @@ package com.example;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.event.ShortcutAction;
-import com.vaadin.server.FontAwesome;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
@@ -29,7 +29,6 @@ public class TodoUI extends UI {
 
     private void setupLayout() {
         layout = new VerticalLayout();
-        layout.setSpacing(true);
         layout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
         setContent(layout);
     }
@@ -37,7 +36,6 @@ public class TodoUI extends UI {
     private void addHeader() {
         Label header = new Label("TODO");
         header.addStyleName(ValoTheme.LABEL_H1);
-        header.setSizeUndefined();
         layout.addComponent(header);
 
     }
@@ -45,20 +43,17 @@ public class TodoUI extends UI {
     private void addForm() {
         HorizontalLayout formLayout = new HorizontalLayout();
         formLayout.setWidth("80%");
-        formLayout.setSpacing(true);
 
         TextField taskField = new TextField();
         taskField.focus();
         Button addButton = new Button("");
 
-        formLayout.addComponents(taskField, addButton);
+        formLayout.addComponentsAndExpand(taskField);
+        formLayout.addComponent(addButton);
         layout.addComponent(formLayout);
 
-        formLayout.setExpandRatio(taskField, 1);
-        taskField.setWidth("100%");
-
         addButton.addStyleName(ValoTheme.BUTTON_PRIMARY);
-        addButton.setIcon(FontAwesome.PLUS);
+        addButton.setIcon(VaadinIcons.PLUS);
 
         addButton.addClickListener(click -> {
             todoList.addTodo(new Todo(taskField.getValue()));
@@ -73,7 +68,7 @@ public class TodoUI extends UI {
     }
 
     private void addActionButtons() {
-        Button deleteButton = new Button("Delete completed");
+        Button deleteButton = new Button("Delete completed items");
 
         deleteButton.addClickListener(click->todoList.deleteCompleted());
 

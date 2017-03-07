@@ -19,7 +19,6 @@ class TodoList extends VerticalLayout implements TodoChangeListener {
     @PostConstruct
     void init() {
         setWidth("80%");
-        setSpacing(true);
 
         update();
     }

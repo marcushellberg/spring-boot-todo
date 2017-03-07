@@ -1,7 +1,7 @@
 package com.example;
 
-import com.vaadin.data.fieldgroup.FieldGroup;
-import com.vaadin.data.util.BeanItem;
+import com.vaadin.data.Binder;
+import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.HorizontalLayout;
@@ -17,19 +17,19 @@ public class TodoLayout extends HorizontalLayout {
 
     public TodoLayout(Todo todo, TodoChangeListener changeListener) {
         setWidth("100%");
-        setSpacing(true);
         setDefaultComponentAlignment(Alignment.MIDDLE_LEFT);
 
         done = new CheckBox();
         text = new TextField();
-        text.setWidth("100%");
         text.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        text.setValueChangeMode(ValueChangeMode.BLUR);
 
-        FieldGroup fieldGroup = new FieldGroup(new BeanItem<>(todo));
-        fieldGroup.setBuffered(false);
-        fieldGroup.bindMemberFields(this);
-        addComponents(done, text);
-        setExpandRatio(text, 1);
+        Binder<Todo> binder = new Binder<>(Todo.class);
+        binder.bindInstanceFields(this);
+        binder.setBean(todo);
+
+        addComponent(done);
+        addComponentsAndExpand(text);
 
         Arrays.asList(done, text).forEach(field -> {
             field.addValueChangeListener(change -> changeListener.todoChanged(todo));
