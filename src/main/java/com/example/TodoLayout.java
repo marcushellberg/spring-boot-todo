@@ -36,8 +36,6 @@ public class TodoLayout extends HorizontalLayout {
         addComponent(done);
         addComponentsAndExpand(text);
 
-        Arrays.asList(done, text).forEach(field -> {
-            field.addValueChangeListener(change -> changeListener.todoChanged(todo));
-        });
+        binder.addValueChangeListener(event -> changeListener.todoChanged(todo));
     }
 }
