@@ -25,7 +25,12 @@ public class TodoLayout extends HorizontalLayout {
         text.setValueChangeMode(ValueChangeMode.BLUR);
 
         Binder<Todo> binder = new Binder<>(Todo.class);
+        //Binds fields in this class to those in Todo based on their names
         binder.bindInstanceFields(this);
+        // The following does the same more explicitly
+        // binder.bind(text, Todo::getText, Todo::setText);
+        // binder.bind(done, Todo::isDone, Todo::setDone);
+
         binder.setBean(todo);
 
         addComponent(done);
