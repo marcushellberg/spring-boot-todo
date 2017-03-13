@@ -45,9 +45,7 @@ class TodoList extends VerticalLayout implements TodoChangeListener {
 
 
     public void deleteCompleted() {
-        repository.deleteInBatch(
-                todos.stream().filter(Todo::isDone).collect(Collectors.toList())
-        );
+        repository.deleteByDone(true);
         update();
     }
 }
