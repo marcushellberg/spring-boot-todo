@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>todo</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Demo project for Spring Boot todo project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
